@@ -3,7 +3,7 @@
     <% @articles.each do |article| %>
     <div class="col-xs-12">
       <div class="text-center">
-        <h2><%= article.title %></h2>
+        <h2><%=  link_to  article.title, article_path(article) %></h2>
         <h6><%= article.created_at.strftime('%b %d, %Y') %></h6>
       </div>
 
@@ -24,3 +24,11 @@
 
 
 <%= link_to 'New Article', new_article_path %>
+  <%= form_tag(@article_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @articles.blank? %>
+  <h4>There are no articles  containing the term <%= params[:search] %>.</h4>
+<% end %>

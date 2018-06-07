@@ -823,3 +823,818 @@ Processing by ArticlesController#show as HTML
 Completed 200 OK in 152ms (Views: 126.2ms | ActiveRecord: 1.5ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-06-05 16:10:15 +0300
+  [1m[35m (6.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (11.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (43.0ms)
+Completed 200 OK in 620ms (Views: 546.7ms | ActiveRecord: 20.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-05 16:10:36 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (55.8ms)
+Completed 200 OK in 195ms (Views: 161.9ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-06-05 16:10:55 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (8.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (132.3ms)
+Completed 200 OK in 328ms (Views: 264.6ms | ActiveRecord: 21.1ms)
+
+
+Started POST "/articles/2/comments" for 127.0.0.1 at 2018-06-05 16:11:18 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4yxhVdbzR7ThUXeCL3dKw9Qp9ePOmqPz4mDeF6/9Cdit4SqbwAFfxqbG9TLuHVK1GBwzCPv375P/eV6TCS29fg==", "comment"=>{"commenter"=>"Alex", "body"=>"Ce faceti ma, iar va jucati?"}, "commit"=>"Create Comment", "article_id"=>"2"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (18.0ms)[0m  [1m[32mINSERT INTO "comments" ("commenter", "body", "article_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["commenter", "Alex"], ["body", "Ce faceti ma, iar va jucati?"], ["article_id", 2], ["created_at", "2018-06-05 13:11:18.061488"], ["updated_at", "2018-06-05 13:11:18.061488"]]
+  [1m[35m (5.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 46ms (ActiveRecord: 25.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-06-05 16:11:18 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 141ms (Views: 113.2ms | ActiveRecord: 2.0ms)
+
+
+Started DELETE "/articles/2/comments/4" for 127.0.0.1 at 2018-06-05 16:11:27 +0300
+Processing by CommentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"tkrULcJVYOV0pewDdcxE/N3QZcazzi7Ho5/5kVdWL7T7ydtZvINZw4O+kMcoHtXAbqoaxGItlrWea0g94RROzg==", "article_id"=>"2", "id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mComment Load (2.0ms)[0m  [1m[34mSELECT  "comments".* FROM "comments" WHERE "comments"."article_id" = $1 AND "comments"."id" = $2 LIMIT $3[0m  [["article_id", 2], ["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.0ms)[0m  [1m[31mDELETE FROM "comments" WHERE "comments"."id" = $1[0m  [["id", 4]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 24ms (ActiveRecord: 6.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-06-05 16:11:27 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 150ms (Views: 116.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-06-05 16:11:39 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 148ms (Views: 112.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-05 17:31:15 +0300
+  [1m[35m (7.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (11.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (37.0ms)
+Completed 200 OK in 563ms (Views: 494.2ms | ActiveRecord: 19.0ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-06-05 17:32:42 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (45.0ms)
+  Rendered articles/new.html.erb within layouts/application (73.0ms)
+Completed 200 OK in 308ms (Views: 264.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-06-05 17:32:59 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Lio0JeoPJrdX1yN2Knq4pEN3FAi2bQh4cQIyYRHUXWElBlklgXdr4dhTai2ZWuVF+K9oufjgDJjUewybpD9Geg==", "article"=>{"title"=>"Second", "text"=>"This is a second article "}, "commit"=>"Save Article"}
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (9.0ms)[0m  [1m[32mINSERT INTO "articles" ("title", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Second"], ["text", "This is a second article "], ["created_at", "2018-06-05 14:32:59.622285"], ["updated_at", "2018-06-05 14:32:59.622285"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 25ms (ActiveRecord: 10.0ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-06-05 17:32:59 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (7.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 3]]
+  Rendered articles/show.html.erb within layouts/application (97.9ms)
+Completed 200 OK in 239ms (Views: 192.7ms | ActiveRecord: 13.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-06-05 17:33:05 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 142ms (Views: 108.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-06-05 18:00:07 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 181ms (Views: 151.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-06-05 18:00:09 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (0.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 220ms (Views: 183.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:06:02 +0300
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (5.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (30.0ms)
+Completed 500 Internal Server Error in 781ms (ActiveRecord: 14.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `recipes_path' for #<#<Class:0x0000000005235348>:0x00000000051fa388>):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_42883660'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:06:57 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (2.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (72.0ms)
+Completed 500 Internal Server Error in 536ms (ActiveRecord: 14.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `recipes_path' for #<#<Class:0x0000000005235348>:0x00000000069951f0>):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_55636860'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:09:28 +0300
+Processing by ArticlesController#index as HTML
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:09:38 +0300
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (16.0ms)
+Completed 500 Internal Server Error in 194ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_100117700'
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (18.0ms)
+Completed 500 Internal Server Error in 204ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_100117700'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:13:28 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (16.0ms)
+Completed 500 Internal Server Error in 232ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_120289740'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:16:59 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (13.0ms)
+Completed 500 Internal Server Error in 232ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_90138020'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:17:09 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 500 Internal Server Error in 210ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_95399980'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:19:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (39.0ms)
+Completed 500 Internal Server Error in 146ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"articles"}, missing required keys: [:id]):
+    24: 
+    25: 
+    26: <%= link_to 'New Article', new_article_path %>
+    27:   <%= form_tag(article_path, :method => "get", id: "search-form") do %>
+    28:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    29:     <%= submit_tag "Search", :name => nil %>
+    30: <% end %>
+  
+app/views/articles/index.html.erb:27:in `_app_views_articles_index_html_erb___951753332_108203000'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:23:31 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 183ms (Views: 157.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:24:08 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::PreparedStatementInvalid (wrong number of bind variables (3 for 2) in: title LIKE ? OR body LIKE ?):
+  
+app/models/article.rb:7:in `search'
+app/controllers/articles_controller.rb:9:in `index'
+Started GET "/?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:25:32 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (10.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (40.0ms)
+Completed 500 Internal Server Error in 167ms (ActiveRecord: 10.0ms)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "body" does not exist
+LINE 1: ....* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE ...
+                                                             ^
+: SELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC):
+    1: <div class="container">
+    2:   <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
+    3:     <% @articles.each do |article| %>
+    4:     <div class="col-xs-12">
+    5:       <div class="text-center">
+    6:         <h2><%=  link_to  article.title, article_path(article) %></h2>
+  
+app/views/articles/index.html.erb:3:in `_app_views_articles_index_html_erb___951753332_97898160'
+Started GET "/?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:25:37 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (3.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (27.0ms)
+Completed 500 Internal Server Error in 125ms (ActiveRecord: 3.0ms)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "body" does not exist
+LINE 1: ....* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE ...
+                                                             ^
+: SELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC):
+    1: <div class="container">
+    2:   <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
+    3:     <% @articles.each do |article| %>
+    4:     <div class="col-xs-12">
+    5:       <div class="text-center">
+    6:         <h2><%=  link_to  article.title, article_path(article) %></h2>
+  
+app/views/articles/index.html.erb:3:in `_app_views_articles_index_html_erb___951753332_106570060'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:26:13 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 191ms (Views: 159.5ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:26:19 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (2.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (28.0ms)
+Completed 500 Internal Server Error in 126ms (ActiveRecord: 2.0ms)
+
+
+  
+ActionView::Template::Error (PG::UndefinedColumn: ERROR:  column "body" does not exist
+LINE 1: ....* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE ...
+                                                             ^
+: SELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR body LIKE '%first%') ORDER BY created_at DESC):
+    1: <div class="container">
+    2:   <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
+    3:     <% @articles.each do |article| %>
+    4:     <div class="col-xs-12">
+    5:       <div class="text-center">
+    6:         <h2><%=  link_to  article.title, article_path(article) %></h2>
+  
+app/views/articles/index.html.erb:3:in `_app_views_articles_index_html_erb___951753332_102540880'
+Started GET "/?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:28:21 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (2.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%first%' OR text LIKE '%first%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 211ms (Views: 166.4ms | ActiveRecord: 9.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=" for 127.0.0.1 at 2018-06-07 23:28:35 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>""}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%%' OR text LIKE '%%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 150ms (Views: 123.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2018-06-07 23:28:48 +0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (44.0ms)
+  Rendered articles/new.html.erb within layouts/application (72.0ms)
+Completed 200 OK in 285ms (Views: 244.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2018-06-07 23:29:10 +0300
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yOHpSCm9+Ee5GwrkQkB7nsvQt8Y2Yrd4pEFux6J5u0+Gv6A7rSu4oA270goXHSyK+7vN/m+vKRVhg3jhyKRwCg==", "article"=>{"title"=>"hi guis, ", "text"=>"This article is for second"}, "commit"=>"Save Article"}
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (3.2ms)[0m  [1m[32mINSERT INTO "articles" ("title", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "hi guis, "], ["text", "This article is for second"], ["created_at", "2018-06-07 20:29:11.028769"], ["updated_at", "2018-06-07 20:29:11.028769"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 19ms (ActiveRecord: 4.2ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-06-07 23:29:11 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (2.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (90.9ms)
+Completed 200 OK in 239ms (Views: 186.6ms | ActiveRecord: 16.0ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2018-06-07 23:29:13 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 138ms (Views: 112.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:29:21 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 149ms (Views: 123.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:30:44 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 150ms (Views: 122.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:30:53 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (4.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 182ms (Views: 150.4ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=" for 127.0.0.1 at 2018-06-07 23:30:58 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>""}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%%' OR text LIKE '%%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 150ms (Views: 121.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=" for 127.0.0.1 at 2018-06-07 23:31:42 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>""}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%%' OR text LIKE '%%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 170ms (Views: 140.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=" for 127.0.0.1 at 2018-06-07 23:32:47 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>""}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%%' OR text LIKE '%%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 168ms (Views: 143.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=dsrrrtgf" for 127.0.0.1 at 2018-06-07 23:32:57 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"dsrrrtgf"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%dsrrrtgf%' OR text LIKE '%dsrrrtgf%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 170ms (Views: 135.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=dsrrrtgf" for 127.0.0.1 at 2018-06-07 23:34:12 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"dsrrrtgf"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%dsrrrtgf%' OR text LIKE '%dsrrrtgf%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 182ms (Views: 153.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:34:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 191ms (Views: 161.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:37:15 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 147ms (Views: 122.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2018-06-07 23:37:20 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 3]]
+  Rendered articles/show.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 210ms (Views: 172.1ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/3?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:37:33 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first", "id"=>"3"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (2.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 3]]
+  Rendered articles/show.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 152ms (Views: 123.2ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/articles/3?utf8=%E2%9C%93&search=first" for 127.0.0.1 at 2018-06-07 23:38:46 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"first", "id"=>"3"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 3]]
+  Rendered articles/show.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 154ms (Views: 123.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:45:04 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 500 Internal Server Error in 222ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `to_model' for #<Article::ActiveRecord_Relation:0x000000000a6d7dd8>
+Did you mean?  to_xml):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:     <%= form_tag(@articles, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil, :id => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_87421100'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:45:47 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (10.0ms)
+Completed 500 Internal Server Error in 211ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `to_model' for #<Article::ActiveRecord_Relation:0x000000000b75b8a8>
+Did you mean?  to_xml):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:     <%= form_tag(@articles, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_96065660'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:46:41 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 500 Internal Server Error in 206ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `to_model' for #<Article::ActiveRecord_Relation:0x000000000c2dcab0>
+Did you mean?  to_xml):
+     9:   </head>
+    10: 
+    11:   <body>
+    12:     <%= form_tag(@articles, :method => "get", id: "search-form") do %>
+    13:     <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    14:     <%= submit_tag "Search", :name => nil %>
+    15: <% end %>
+  
+app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___1483831770_102497340'
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:47:25 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 170ms (Views: 144.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:47:44 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 163ms (Views: 135.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-06-07 23:47:47 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 242ms (Views: 204.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/4?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:47:54 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second", "id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 157ms (Views: 126.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/4?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:48:19 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second", "id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 188ms (Views: 160.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/4?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:48:23 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second", "id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 148ms (Views: 118.6ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/" for 127.0.0.1 at 2018-06-07 23:48:37 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 166ms (Views: 135.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2018-06-07 23:48:44 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 243ms (Views: 206.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/2?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:48:53 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second", "id"=>"2"}
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 2]]
+  Rendered articles/show.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 159ms (Views: 129.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:50:58 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 181ms (Views: 150.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2018-06-07 23:51:00 +0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (1.0ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 4]]
+  Rendered articles/show.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 230ms (Views: 196.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/articles?utf8=%E2%9C%93&search=hello" for 127.0.0.1 at 2018-06-07 23:51:12 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"hello"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%hello%' OR text LIKE '%hello%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 152ms (Views: 120.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:51:28 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 151ms (Views: 120.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:52:43 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 186ms (Views: 155.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:53:56 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 176ms (Views: 145.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles?utf8=%E2%9C%93&search=second" for 127.0.0.1 at 2018-06-07 23:54:32 +0300
+Processing by ArticlesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"second"}
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE (title LIKE '%second%' OR text LIKE '%second%') ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 173ms (Views: 145.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:54:44 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 165ms (Views: 136.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:56:34 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 184ms (Views: 151.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:59:01 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 179ms (Views: 155.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:59:09 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 178ms (Views: 146.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-07 23:59:18 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 133ms (Views: 111.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-06-08 00:00:49 +0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY created_at DESC[0m
+  Rendered articles/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 164ms (Views: 140.2ms | ActiveRecord: 1.0ms)
+
+

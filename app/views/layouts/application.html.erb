@@ -9,6 +9,20 @@
   </head>
 
   <body>
+  <header>
+  Hello, this is personal website
+  </header>
+  <nav>
+  <%= link_to 'Home', articles_path %>
+  </nav>
+  <section>
+    <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+</section>
+<main>
     <%= yield %>
+    </main>
   </body>
 </html>
