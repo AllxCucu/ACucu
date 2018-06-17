@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Acucu</title>
+    <title>HASI.ro</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -17,12 +17,15 @@
   </nav>
   <section>
     <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
     <%= submit_tag "Search", :name => nil %>
 <% end %>
 </section>
-<main>
+
     <%= yield %>
-    </main>
+
+    <footer>
+<p align = "right"> Copyright HASI 2018 </p>
+</footer>
   </body>
 </html>
