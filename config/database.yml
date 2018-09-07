@@ -81,7 +81,5 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: acucu_production
-  username: acucu
-  password: <%= ENV['ACUCU_DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 15
